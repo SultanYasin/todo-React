@@ -1,23 +1,24 @@
-import logo from './logo.svg';
+import React from 'react';
+import { useState } from 'react';
+import TodoList from './Components/TodoList'
+import TodoListInfo from './Components/TodoListInfo'
 import './App.css';
 
+
 function App() {
+   
+  let [view , setView]  =useState('list')
+  let [viewDate , setViewDate] = useState(undefined)
+
+  let component;
+  if (view === 'list') {component = < TodoList setView = {setView} viewDate={viewDate} setViewDate={setViewDate} />}   
+  else if(view === 'info') {component = < TodoListInfo setView = {setView} viewDate={viewDate} setViewDate={setViewDate}  /> }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        {component}
+        <button onClick={()=> setView('info')} >info</button>
+        <button onClick={()=> setView('list')} >LIST</button>
     </div>
   );
 }
